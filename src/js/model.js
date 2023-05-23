@@ -1,13 +1,12 @@
-import { async } from "regenerator-runtime";
-import { API_URL, RES_PER_PAGE, KEY } from "./config.js";
+import { async } from 'regenerator-runtime';
+import { API_URL, RES_PER_PAGE, KEY } from './config.js';
 // import { getJSON, sendJSON } from './helpers.js';
-import { AJAX } from "./helpers.js";
-
+import { AJAX } from './helpers.js';
 
 export const state = {
     recipe: {},
     search: {
-        query: "",
+        query: '',
         results: [],
         page: 1,
         resultsPerPage: RES_PER_PAGE,
@@ -89,7 +88,7 @@ export const updateServings = function (newServings) {
 };
 
 const persistBookmarks = function () {
-    localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
+    localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 };
 
 export const addBookmark = function (recipe) {
@@ -114,13 +113,13 @@ export const deleteBookmark = function (id) {
 };
 
 const init = function () {
-    const storage = localStorage.getItem("bookmarks");
+    const storage = localStorage.getItem('bookmarks');
     if (storage) state.bookmarks = JSON.parse(storage);
 };
 init();
 
 const clearBookmarks = function () {
-    localStorage.clear("bookmarks");
+    localStorage.clear('bookmarks');
 };
 // clearBookmarks();
 
@@ -128,14 +127,14 @@ export const uploadRecipe = async function (newRecipe) {
     try {
         const ingredients = Object.entries(newRecipe)
             .filter(
-                (entry) => entry[0].startsWith("ingredient") && entry[1] !== ""
+                (entry) => entry[0].startsWith('ingredient') && entry[1] !== ''
             )
             .map((ing) => {
-                const ingArr = ing[1].split(",").map((el) => el.trim());
+                const ingArr = ing[1].split(',').map((el) => el.trim());
                 // const ingArr = ing[1].replaceAll(' ', '').split(',');
                 if (ingArr.length !== 3)
                     throw new Error(
-                        "Wrong ingredient fromat! Please use the correct format :)"
+                        'Wrong ingredient fromat! Please use the correct format :)'
                     );
 
                 const [quantity, unit, description] = ingArr;
